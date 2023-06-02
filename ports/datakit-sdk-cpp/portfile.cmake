@@ -1,21 +1,42 @@
-vcpkg_from_github(
-  OUT_SOURCE_PATH SOURCE_PATH
-  REPO ZhouGYong/datakit-sdk-cpp
-  REF 3560ebb427d9f40c6416b919d200ed2b9429673e
-  SHA512 7b2bb7acb2a8ff07bff59cfa27247a7b2cced03828919cd65cc0c8cf1f724f5f1e947ed6992dcdbc913fb470694a52613d1861eaaadbf8903e94eb9cdfe4d000
-  HEAD_REF main
+vcpkg_check_linkage(ONLY_DYNAMIC_LIBRARY)
+
+if(VCPKG_TARGET_IS_WINDOWS)
+    vcpkg_download_distfile(ARCHIVE
+        URLS "https://github.com/ZhouGYong/datakit-sdk-cpp/blob/main/release/datakit_sdk_redist-v0.7.5.zip"
+        FILENAME "datakit_sdk_redist-v0.7.5.zip"
+        SHA512 c6235249e00c5bb52fb8451f9ad35e0d784817833fc79c574f941207f6c98cb858a56627e50f4046b8a4e86457cbbd20574d9a20addb7dad56f3838279c7c7ee
+    )
+elseif(VCPKG_TARGET_IS_LINUX)
+    vcpkg_download_distfile(ARCHIVE
+        URLS "https://github.com/ZhouGYong/datakit-sdk-cpp/blob/main/release/datakit_sdk_redist-v0.7.5.tar.gz"
+        FILENAME "datakit_sdk_redist-v0.7.5.tar.gz"
+        SHA512 538a2c79a2609f600ef37fd2f5e9664af059a935705f7f3ef1d690a9da79135ca1aee5395f4156ac766cae819487ae99013fb0dacebfa8a109a0c3a85c9334de
+    )
+endif()
+
+vcpkg_extract_source_archive_ex(
+    OUT_SOURCE_PATH SOURCE_PATH
+    ARCHIVE "${ARCHIVE}"
 )
 
-vcpkg_configure_cmake(
-  SOURCE_PATH "${SOURCE_PATH}"
-  PREFER_NINJA
-)
-vcpkg_install_cmake()
-vcpkg_fixup_cmake_targets()
+file(GLOB headers "${SOURCE_PATH}/include/*")
+file(COPY ${headers} DESTINATION "${CURRENT_PACKAGES_DIR}/include")
 
-file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
+if(VCPKG_TARGET_IS_WINDOWS)
+  if(VCPKG_TARGET_ARCHITECTURE STREQUAL "x64")
+    file(COPY "${SOURCE_PATH}/lib/win64/*" DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
+  elseif(VCPKG_TARGET_ARCHITECTURE STREQUAL "x86")
+    file(COPY "${SOURCE_PATH}/lib/win64/*" DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
+  endif()
+elseif(VCPKG_TARGET_IS_LINUX)
+  if(VCPKG_TARGET_ARCHITECTURE STREQUAL "x64")
+    file(COPY "${SOURCE_PATH}/lib64/libxl.so" DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
+    file(COPY "${SOURCE_PATH}/lib64/libxl.so" DESTINATION "${CURRENT_PACKAGES_DIR}/debug/lib")
+  elseif(VCPKG_TARGET_ARCHITECTURE STREQUAL "x86")
+    file(COPY "${SOURCE_PATH}/lib/libxl.so" DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
+    file(COPY "${SOURCE_PATH}/lib/libxl.so" DESTINATION "${CURRENT_PACKAGES_DIR}/debug/lib")
+  endif()
+endif()
 
-file(
-  INSTALL "${SOURCE_PATH}/LICENSE"
-  DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}"
-  RENAME copyright)
+# Handle copyright
+#file(INSTALL "${SOURCE_PATH}/license.txt" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
