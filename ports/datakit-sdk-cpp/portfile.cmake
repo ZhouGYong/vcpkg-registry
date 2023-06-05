@@ -2,15 +2,15 @@ vcpkg_check_linkage(ONLY_DYNAMIC_LIBRARY)
 
 if(VCPKG_TARGET_IS_WINDOWS)
     vcpkg_download_distfile(ARCHIVE
-        URLS "https://raw.githubusercontent.com/ZhouGYong/datakit-sdk-cpp/main/release/datakit_sdk_redist-v0.8.0.zip"
+        URLS "https://raw.githubusercontent.com/ZhouGYong/datakit-sdk-cpp/main/release/datakit_sdk_redist-v0.8.1.zip"
         FILENAME "datakit_sdk_redist-v0.8.0.zip"
-        SHA512 6e76d5ed802de4819c209f00bb1fc684b9f4cf8358cd84173810647e39d0bb101b9abecba686900e3471855869a56d2fcb63a139380b6ed2ac0f23539c13ba12
+        SHA512 627e6af5f57df0286bde87bbcd185cc48554864c040f2031967a165e3ea5a8685e232576c7fc7768d444723afdc317d3b38e95c078728607458c3c2e078c09bf
     )
 elseif(VCPKG_TARGET_IS_LINUX)
     vcpkg_download_distfile(ARCHIVE
-        URLS "https://raw.githubusercontent.com/ZhouGYong/datakit-sdk-cpp/main/release/datakit_sdk_redist-v0.8.0.tar.gz"
+        URLS "https://raw.githubusercontent.com/ZhouGYong/datakit-sdk-cpp/main/release/datakit_sdk_redist-v0.8.1.tar.gz"
         FILENAME "datakit_sdk_redist-v0.8.0.tar.gz"
-        SHA512 6e76d5ed802de4819c209f00bb1fc684b9f4cf8358cd84173810647e39d0bb101b9abecba686900e3471855869a56d2fcb63a139380b6ed2ac0f23539c13ba12
+        SHA512 627e6af5f57df0286bde87bbcd185cc48554864c040f2031967a165e3ea5a8685e232576c7fc7768d444723afdc317d3b38e95c078728607458c3c2e078c09bf
     )
 endif()
 
