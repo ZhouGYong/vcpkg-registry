@@ -24,7 +24,8 @@ vcpkg_from_github(
 )
 
 vcpkg_configure_cmake(
-  SOURCE_PATH "${SOURCE_PATH}"
+  SOURCE_PATH "${SOURCE_PATH}/src"
+  PROJECT_NAME ft-sdk
   PREFER_NINJA
 )
 vcpkg_install_cmake()
