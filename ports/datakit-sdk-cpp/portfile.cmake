@@ -27,6 +27,8 @@ vcpkg_configure_cmake(
   SOURCE_PATH "${SOURCE_PATH}/src"
   PROJECT_NAME ft-sdk
   PREFER_NINJA
+  CONFIGURE_ENVIRONMENT_VARIABLES
+        BUILD_FROM_VCPKG=TRUE
 )
 vcpkg_install_cmake()
 vcpkg_fixup_cmake_targets()
