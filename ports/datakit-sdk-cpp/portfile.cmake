@@ -22,17 +22,19 @@ vcpkg_from_github(
   HEAD_REF main
 )
 
+if(VCPKG_TARGET_IS_WINDOWS)
 set(VCPKG_TARGET_ARCHITECTURE x64)
 set(VCPKG_CRT_LINKAGE dynamic)
 set(VCPKG_LIBRARY_LINKAGE dynamic)
-set(VCPKG_CXX_FLAGS "-std=c++17")
+set(VCPKG_CXX_FLAGS "/std=c++17 /EHa")
+set(VCPKG_C_FLAGS "/GL /Gw /GS-")
+endif()
 
 vcpkg_configure_cmake(
   SOURCE_PATH "${SOURCE_PATH}/src"
   PROJECT_NAME ft-sdk
   PREFER_NINJA
   OPTIONS
-	-DVCPKG_CXX_FLAGS=17
 	-DCMAKE_BUILD_TYPE=release
 	-DBUILD_FROM_VCPKG=TRUE
 
