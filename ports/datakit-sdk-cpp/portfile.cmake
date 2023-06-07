@@ -33,7 +33,7 @@ endif()
 vcpkg_configure_cmake(
   SOURCE_PATH "${SOURCE_PATH}/src"
   PROJECT_NAME ft-sdk
-  PREFER_NINJA
+  WINDOWS_USE_MSBUILD
   OPTIONS
 	-DCMAKE_BUILD_TYPE=release
 	-DBUILD_FROM_VCPKG=TRUE
