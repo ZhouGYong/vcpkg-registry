@@ -30,6 +30,8 @@ set(VCPKG_CXX_FLAGS "/std:c++17 /EHa")
 set(VCPKG_C_FLAGS "/GL /Gw /GS-")
 endif()
 
+set(VCPKG_BUILD_TYPE release)
+
 vcpkg_configure_cmake(
   SOURCE_PATH "${SOURCE_PATH}/src"
   PROJECT_NAME ft-sdk
