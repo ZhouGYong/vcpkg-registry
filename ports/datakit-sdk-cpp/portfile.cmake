@@ -44,8 +44,8 @@ vcpkg_configure_cmake(
 vcpkg_install_cmake()
 #vcpkg_fixup_cmake_targets()
 
-file(GLOB headers "${SOURCE_PATH}/src/ft-sdk/include/*")
-file(COPY ${headers} DESTINATION "${CURRENT_PACKAGES_DIR}/include")
+file(GLOB headers "${SOURCE_PATH}/src/datakit-sdk-cpp/ft-sdk/Include/*.h")
+file(COPY ${headers} DESTINATION "${CURRENT_PACKAGES_DIR}/include/datakit-sdk")
 
 #install(TARGETS ft-sdk
 #  RUNTIME DESTINATION bin
