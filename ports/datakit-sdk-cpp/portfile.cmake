@@ -17,7 +17,7 @@ vcpkg_check_linkage(ONLY_DYNAMIC_LIBRARY)
 vcpkg_from_github(
   OUT_SOURCE_PATH SOURCE_PATH
   REPO ZhouGYong/datakit-sdk-cpp
-  REF 1c3947f35489543974cdfaec1aecb1391f6e8d5e
+  REF 63823ddf70853e098f5efa4e3add33b173b56c9f
   SHA512 7b87b0137f167098ba1a7e0fde9a7c01882d1e08614951d62779fc6bc57afb3228fef03118cd02c3e5d0a4e5bd1c376dad95e39f8518a1c5352de08b87c0ab70
   HEAD_REF main
 )
@@ -73,4 +73,4 @@ file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
 
 
 # Handle copyright
-#file(INSTALL "${SOURCE_PATH}/license.txt" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
+file(INSTALL "${SOURCE_PATH}/license.txt" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
