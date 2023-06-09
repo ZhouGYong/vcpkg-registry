@@ -47,37 +47,27 @@ vcpkg_install_cmake()
 file(GLOB headers "${SOURCE_PATH}/src/ft-sdk/include/*")
 file(COPY ${headers} DESTINATION "${CURRENT_PACKAGES_DIR}/include")
 
-install(TARGETS ft-sdk
-  RUNTIME DESTINATION bin
-  LIBRARY DESTINATION lib
-  ARCHIVE DESTINATION lib 
-)
+#install(TARGETS ft-sdk
+#  RUNTIME DESTINATION bin
+#  LIBRARY DESTINATION lib
+#  ARCHIVE DESTINATION lib 
+#)
 
-if (__UNDEFINED)
+#if (__UNDEFINED)
 if(VCPKG_TARGET_IS_WINDOWS)
   if(VCPKG_TARGET_ARCHITECTURE STREQUAL "x64")
-    file(GLOB libs "${SOURCE_PATH}/lib/win64/*.lib")
-    file(COPY ${libs} DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
-    file(COPY "${SOURCE_PATH}/lib/win64/fmt.dll" DESTINATION "${CURRENT_PACKAGES_DIR}/bin")
-file(COPY "${SOURCE_PATH}/lib/win64/fmt.dll" DESTINATION "${CURRENT_PACKAGES_DIR}/bin")
-file(COPY "${SOURCE_PATH}/lib/win64/ft-sdk.dll" DESTINATION "${CURRENT_PACKAGES_DIR}/bin")
-file(COPY "${SOURCE_PATH}/lib/win64/libcurl.dll" DESTINATION "${CURRENT_PACKAGES_DIR}/bin")
-file(COPY "${SOURCE_PATH}/lib/win64/sqlite3.dll" DESTINATION "${CURRENT_PACKAGES_DIR}/bin")
-file(COPY "${SOURCE_PATH}/lib/win64/zlib1.dll" DESTINATION "${CURRENT_PACKAGES_DIR}/bin")
-  elseif(VCPKG_TARGET_ARCHITECTURE STREQUAL "x86")
-    file(GLOB libs "${SOURCE_PATH}/lib/win64/*")
-    file(COPY ${libs} DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
+    #file(GLOB libs "${SOURCE_PATH}/lib/win64/*.lib")
+    #file(COPY ${libs} DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
+    file(COPY "${SOURCE_PATH}/lib/win64/ft-sdk.lib" DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
+    file(COPY "${SOURCE_PATH}/lib/win64/ft-sdk.dll" DESTINATION "${CURRENT_PACKAGES_DIR}/bin")
   endif()
 elseif(VCPKG_TARGET_IS_LINUX)
   if(VCPKG_TARGET_ARCHITECTURE STREQUAL "x64")
     file(GLOB libs "${SOURCE_PATH}/lib/x86_64/*")
     file(COPY ${libs} DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
-  elseif(VCPKG_TARGET_ARCHITECTURE STREQUAL "x86")
-    file(GLOB libs "${SOURCE_PATH}/lib/x86_64/*")
-    file(COPY ${libs} DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
   endif()
 endif()
-endif()
+#endif()
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
 
