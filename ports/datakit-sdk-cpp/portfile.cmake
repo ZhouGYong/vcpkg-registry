@@ -17,7 +17,7 @@ vcpkg_check_linkage(ONLY_DYNAMIC_LIBRARY)
 vcpkg_from_github(
   OUT_SOURCE_PATH SOURCE_PATH
   REPO ZhouGYong/datakit-sdk-cpp
-  REF 2d64b68cd40884e7e17fde3a1170949b5c74f4b0
+  REF c0c480655b81941251fd507ec1d4f82aa180ae62
   SHA512 4cedd136fa38f17bfca09f7fc5a607aa41621dee5bd8a876732fd4efe57d072937ccce40d15b77ca9f57d81ab37a7edbdfddce6c6e4b8c63fbf11e5ca6ef55c2
   HEAD_REF main
 )
@@ -61,8 +61,8 @@ if(VCPKG_TARGET_IS_WINDOWS)
     #file(COPY ${libs} DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
     #if(${VCPKG_BUILD_TYPE} STREQUAL "Debug")
       message(STATUS "copying debug")
-      file(COPY "${SOURCE_PATH}/datakit_sdk_redist/debug/lib/ft-sdkd.lib" DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
-      file(COPY "${SOURCE_PATH}/datakit_sdk_redist/debug/lib/ft-sdkd.dll" DESTINATION "${CURRENT_PACKAGES_DIR}/bin")
+      file(COPY "${SOURCE_PATH}/datakit_sdk_redist/debug/lib/ft-sdkd.lib" DESTINATION "${CURRENT_PACKAGES_DIR}/debug/lib")
+      file(COPY "${SOURCE_PATH}/datakit_sdk_redist/debug/lib/ft-sdkd.dll" DESTINATION "${CURRENT_PACKAGES_DIR}/debug/bin")
     #else()
       message(STATUS "copying release")
       file(COPY "${SOURCE_PATH}/datakit_sdk_redist/release/lib/ft-sdk.lib" DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
