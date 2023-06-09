@@ -8,6 +8,9 @@
   	"nlohmann-json",
   	"restclient-cpp",
   	"sqlitecpp",
-	"stduuid"
+	{
+           "name": "stduuid",
+           "features": ["gsl-span"]
+        }
 	]
 }
