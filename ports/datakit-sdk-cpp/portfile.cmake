@@ -18,7 +18,7 @@ vcpkg_from_github(
   OUT_SOURCE_PATH SOURCE_PATH
   REPO ZhouGYong/datakit-sdk-cpp
   REF 56c95ce822ae704a62569c0cf487a4cd7425edb6
-  SHA512 60b589823f164c1d401c68973f3e4c48f97024207b2976643f151c4d46ba4b40f68f65b99fb0f98056f981839d9e12d0b73d450e5a0ef9fc59576464d4d7ae91
+  SHA512 0659234971c79b10a8bd235e19d3fc30bd04c71f26a64eeffca8e17d1abcbb31306c6ec174b2145749b5a0b4be9ea8a9531d239c01113d9f9bdd97b749420d7a
   HEAD_REF main
 )
 
@@ -60,8 +60,13 @@ if(VCPKG_TARGET_IS_WINDOWS)
   if(VCPKG_TARGET_ARCHITECTURE STREQUAL "x64")
     #file(GLOB libs "${SOURCE_PATH}/lib/win64/*.lib")
     #file(COPY ${libs} DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
-    file(COPY "${SOURCE_PATH}/datakit_sdk_redist/lib/ft-sdk.lib" DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
-    file(COPY "${SOURCE_PATH}/datakit_sdk_redist/lib/ft-sdk.dll" DESTINATION "${CURRENT_PACKAGES_DIR}/bin")
+    if(VCPKG_BUILD_TYPE STREQUAL "debug")
+      file(COPY "${SOURCE_PATH}/datakit_sdk_redist/debug/lib/ft-sdkd.lib" DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
+      file(COPY "${SOURCE_PATH}/datakit_sdk_redist/debug/lib/ft-sdkd.dll" DESTINATION "${CURRENT_PACKAGES_DIR}/bin")
+    elseif(VCPKG_BUILD_TYPE STREQUAL "releaase")
+      file(COPY "${SOURCE_PATH}/datakit_sdk_redist/release/lib/ft-sdk.lib" DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
+      file(COPY "${SOURCE_PATH}/datakit_sdk_redist/release/lib/ft-sdk.dll" DESTINATION "${CURRENT_PACKAGES_DIR}/bin")
+    endif()
   endif()
 elseif(VCPKG_TARGET_IS_LINUX)
   if(VCPKG_TARGET_ARCHITECTURE STREQUAL "x64")
