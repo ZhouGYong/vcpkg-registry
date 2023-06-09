@@ -17,7 +17,7 @@ vcpkg_check_linkage(ONLY_DYNAMIC_LIBRARY)
 vcpkg_from_github(
   OUT_SOURCE_PATH SOURCE_PATH
   REPO ZhouGYong/datakit-sdk-cpp
-  REF c1e7559288cd92fabdaebc22d44b719a03d90788
+  REF 1c3947f35489543974cdfaec1aecb1391f6e8d5e
   SHA512 c361c69d471e906803ceaec3a743a75e1187d9aeddf485e22e60b5931284e3175c5cd3332234455630b649bbc1dfa3c4c0d7a4a992c348e67f34ccd7312c5b93
   HEAD_REF main
 )
@@ -43,6 +43,41 @@ vcpkg_configure_cmake(
 )
 vcpkg_install_cmake()
 vcpkg_fixup_cmake_targets()
+
+file(GLOB headers "${SOURCE_PATH}/src/ft-sdk/include/*")
+file(COPY ${headers} DESTINATION "${CURRENT_PACKAGES_DIR}/include")
+
+install(TARGETS ft-sdk
+  RUNTIME DESTINATION bin
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib 
+)
+
+if (__UNDEFINED)
+if(VCPKG_TARGET_IS_WINDOWS)
+  if(VCPKG_TARGET_ARCHITECTURE STREQUAL "x64")
+    file(GLOB libs "${SOURCE_PATH}/lib/win64/*.lib")
+    file(COPY ${libs} DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
+    file(COPY "${SOURCE_PATH}/lib/win64/fmt.dll" DESTINATION "${CURRENT_PACKAGES_DIR}/bin")
+file(COPY "${SOURCE_PATH}/lib/win64/fmt.dll" DESTINATION "${CURRENT_PACKAGES_DIR}/bin")
+file(COPY "${SOURCE_PATH}/lib/win64/ft-sdk.dll" DESTINATION "${CURRENT_PACKAGES_DIR}/bin")
+file(COPY "${SOURCE_PATH}/lib/win64/libcurl.dll" DESTINATION "${CURRENT_PACKAGES_DIR}/bin")
+file(COPY "${SOURCE_PATH}/lib/win64/sqlite3.dll" DESTINATION "${CURRENT_PACKAGES_DIR}/bin")
+file(COPY "${SOURCE_PATH}/lib/win64/zlib1.dll" DESTINATION "${CURRENT_PACKAGES_DIR}/bin")
+  elseif(VCPKG_TARGET_ARCHITECTURE STREQUAL "x86")
+    file(GLOB libs "${SOURCE_PATH}/lib/win64/*")
+    file(COPY ${libs} DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
+  endif()
+elseif(VCPKG_TARGET_IS_LINUX)
+  if(VCPKG_TARGET_ARCHITECTURE STREQUAL "x64")
+    file(GLOB libs "${SOURCE_PATH}/lib/x86_64/*")
+    file(COPY ${libs} DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
+  elseif(VCPKG_TARGET_ARCHITECTURE STREQUAL "x86")
+    file(GLOB libs "${SOURCE_PATH}/lib/x86_64/*")
+    file(COPY ${libs} DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
+  endif()
+endif()
+endif()
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
 
