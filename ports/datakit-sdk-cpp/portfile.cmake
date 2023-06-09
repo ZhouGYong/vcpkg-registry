@@ -42,7 +42,7 @@ vcpkg_configure_cmake(
         BUILD_FROM_VCPKG=TRUE
 )
 vcpkg_install_cmake()
-vcpkg_fixup_cmake_targets()
+#vcpkg_fixup_cmake_targets()
 
 file(GLOB headers "${SOURCE_PATH}/src/ft-sdk/include/*")
 file(COPY ${headers} DESTINATION "${CURRENT_PACKAGES_DIR}/include")
