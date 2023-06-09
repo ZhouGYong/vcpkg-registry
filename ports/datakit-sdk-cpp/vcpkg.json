@@ -14,7 +14,7 @@
         },
         {
             "name": "restclient-cpp",
-            "version-date>=":"2022-02-09"
+            "version>=":"2022-02-09"
         },
         {
             "name": "sqlitecpp",
