@@ -6,24 +6,24 @@
     "dependencies": [  
    	    {
             "name": "spdlog",
-            "version":"1.11.0"
+            "version>=":"1.11.0"
         },
         {
             "name": "nlohmann-json",
-            "version":"3.11.2"
+            "version>=":"3.11.2"
         },
         {
             "name": "restclient-cpp",
-            "version-string":"2022-02-09"
+            "version-date>=":"2022-02-09"
         },
         {
             "name": "sqlitecpp",
-            "version":"3.2.0"
+            "version>=":"3.2.0"
         },
 	    {
            "name": "stduuid",
            "features": ["gsl-span"],
-           "version": "1.2.2"
+           "version>=": "1.2.2"
         }
 	]
 }
