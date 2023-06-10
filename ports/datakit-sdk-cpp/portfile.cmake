@@ -17,7 +17,7 @@ vcpkg_check_linkage(ONLY_DYNAMIC_LIBRARY)
 vcpkg_from_github(
   OUT_SOURCE_PATH SOURCE_PATH
   REPO ZhouGYong/datakit-sdk-cpp
-  REF ebec7116c0c9fda85d85a355abcb03c3f32eccc3
+  REF a998f4b2a9b1f839ef8bc1ef5489d041c369f167
   SHA512 0c216b64d954ce58d1c9e595726b5572cfa8c8a3fa35b50dedc259d80e6596700e6ebbcd243e8f6e378f02646f44d8e4b55742a572e3bc61e68e20ea56a329dd
   HEAD_REF main
 )
