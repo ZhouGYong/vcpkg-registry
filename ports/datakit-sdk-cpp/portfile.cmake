@@ -17,17 +17,17 @@ vcpkg_check_linkage(ONLY_DYNAMIC_LIBRARY)
 vcpkg_from_github(
   OUT_SOURCE_PATH SOURCE_PATH
   REPO ZhouGYong/datakit-sdk-cpp
-  REF c0c480655b81941251fd507ec1d4f82aa180ae62
+  REF ebec7116c0c9fda85d85a355abcb03c3f32eccc3
   SHA512 4587ab909b6f8c4b397be77fe3521c3dc94297f202b919de6d28c4720ab4219ae2114f123d22d1ab314dae7668f7f7e91a3061ea55c99ed974285e479d17aba7
   HEAD_REF main
 )
 
 if(VCPKG_TARGET_IS_WINDOWS)
-set(VCPKG_TARGET_ARCHITECTURE x64)
-set(VCPKG_CRT_LINKAGE dynamic)
-set(VCPKG_LIBRARY_LINKAGE dynamic)
-set(VCPKG_CXX_FLAGS "/std:c++17 /EHa")
-set(VCPKG_C_FLAGS "/GL /Gw /GS-")
+  set(VCPKG_TARGET_ARCHITECTURE x64)
+  set(VCPKG_CRT_LINKAGE dynamic)
+  set(VCPKG_LIBRARY_LINKAGE dynamic)
+  set(VCPKG_CXX_FLAGS "/std:c++17 /EHa")
+  set(VCPKG_C_FLAGS "/GL /Gw /GS-")
 endif()
 
 #set(VCPKG_BUILD_TYPE release)
