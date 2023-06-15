@@ -38,9 +38,6 @@ vcpkg_configure_cmake(
   WINDOWS_USE_MSBUILD
   OPTIONS
 	  -DBUILD_FROM_VCPKG=TRUE
-
-  CONFIGURE_ENVIRONMENT_VARIABLES
-        BUILD_FROM_VCPKG=TRUE
 )
 vcpkg_install_cmake()
 #vcpkg_fixup_cmake_targets()
