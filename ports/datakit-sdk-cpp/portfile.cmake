@@ -40,7 +40,7 @@ vcpkg_configure_cmake(
 	  -DBUILD_FROM_VCPKG=TRUE
 )
 vcpkg_install_cmake()
-#vcpkg_fixup_cmake_targets()
+vcpkg_fixup_cmake_targets()
 
 file(GLOB headers "${SOURCE_PATH}/src/datakit-sdk-cpp/ft-sdk/Include/*.h")
 file(COPY ${headers} DESTINATION "${CURRENT_PACKAGES_DIR}/include/datakit-sdk-cpp")
