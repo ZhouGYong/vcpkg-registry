@@ -1,24 +1,10 @@
 vcpkg_check_linkage(ONLY_DYNAMIC_LIBRARY)
 
-#if(VCPKG_TARGET_IS_WINDOWS)
-#    vcpkg_download_distfile(ARCHIVE
-#        URLS "https://raw.githubusercontent.com/ZhouGYong/datakit-sdk-cpp/main/release/datakit_sdk_redist-v0.8.1.zip"
-#        FILENAME "datakit_sdk_redist-v0.8.0.zip"
-#        SHA512 627e6af5f57df0286bde87bbcd185cc48554864c040f2031967a165e3ea5a8685e232576c7fc7768d444723afdc317d3b38e95c078728607458c3c2e078c09bf
-#    )
-#elseif(VCPKG_TARGET_IS_LINUX)
-#    vcpkg_download_distfile(ARCHIVE
-#        URLS "https://raw.githubusercontent.com/ZhouGYong/datakit-sdk-cpp/main/release/datakit_sdk_redist-v0.8.1.tar.gz"
-#        FILENAME "datakit_sdk_redist-v0.8.0.tar.gz"
-#        SHA512 627e6af5f57df0286bde87bbcd185cc48554864c040f2031967a165e3ea5a8685e232576c7fc7768d444723afdc317d3b38e95c078728607458c3c2e078c09bf
-#    )
-#endif()
-
 vcpkg_from_github(
   OUT_SOURCE_PATH SOURCE_PATH
   REPO ZhouGYong/datakit-sdk-cpp
-  REF d61c7e099ca0e208cbf6372d833fc1538373d4f6
-  SHA512 bb2a620ea588a7029200991998f1fd4cb89721b113081a7992295970099964f84655c73b53e0e24eaa6b52eb3c1f197cbc0413c60eb0104ec5c7fdf20a327542
+  REF ec953d80875850503e220ff7c37f4584f21824ee
+  SHA512 baa3feb5ce15edd09d81dc66e102fd5d3b603cc2a4d01470fec6043c9d5b8e20e5cd054b6d15c36e851f4726fc79420d5e2c36fa7394dd3ccc68f2e7cd7a1283
   HEAD_REF main
 )
 
@@ -40,23 +26,14 @@ vcpkg_configure_cmake(
 	  -DBUILD_FROM_VCPKG=TRUE
 )
 vcpkg_install_cmake()
-#vcpkg_fixup_cmake_targets()
 
 file(GLOB headers "${SOURCE_PATH}/src/datakit-sdk-cpp/ft-sdk/Include/*.h")
 file(COPY ${headers} DESTINATION "${CURRENT_PACKAGES_DIR}/include/datakit-sdk-cpp")
 
-#install(TARGETS ft-sdk
-#  RUNTIME DESTINATION bin
-#  LIBRARY DESTINATION lib
-#  ARCHIVE DESTINATION lib 
-#)
 
 #if (__UNDEFINED)
 if(VCPKG_TARGET_IS_WINDOWS)
   if(VCPKG_TARGET_ARCHITECTURE STREQUAL "x64")
-    #file(GLOB libs "${SOURCE_PATH}/lib/win64/*.lib")
-    #file(COPY ${libs} DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
-    #if(${VCPKG_BUILD_TYPE} STREQUAL "Debug")
       message(STATUS "copying debug")
       file(COPY "${SOURCE_PATH}/datakit_sdk_redist/debug/lib/ft-sdkd.lib" DESTINATION "${CURRENT_PACKAGES_DIR}/debug/lib")
       file(COPY "${SOURCE_PATH}/datakit_sdk_redist/debug/lib/ft-sdkd.dll" DESTINATION "${CURRENT_PACKAGES_DIR}/debug/bin")
@@ -81,15 +58,6 @@ elseif(VCPKG_TARGET_IS_LINUX)
   file(COPY "${SOURCE_PATH}/datakit_sdk_redist/Release/cmake/ft-sdk-targets.cmake" DESTINATION "${CURRENT_PACKAGES_DIR}/share/datakit-sdk-cpp")
   file(COPY "${SOURCE_PATH}/datakit_sdk_redist/Release/cmake/ft-sdk-targets-release.cmake" DESTINATION "${CURRENT_PACKAGES_DIR}/share/datakit-sdk-cpp")
   file(COPY "${SOURCE_PATH}/datakit_sdk_redist/Debug/cmake/ft-sdk-targets-debug.cmake" DESTINATION "${CURRENT_PACKAGES_DIR}/share/datakit-sdk-cpp")
-
-  #file(GLOB_RECURSE RELEASE_TARGETS
-  #"${CURRENT_PACKAGES_DIR}/share/datakit-sdk-cpp/*.cmake"
-  #)
-  #foreach(RELEASE_TARGET IN LISTS RELEASE_TARGETS)
-  #  file(READ ${RELEASE_TARGET} _contents)
-  #  string(REPLACE "${CURRENT_PACKAGES_DIR}" "\${CURRENT_PACKAGES_DIR}" _contents "${_contents}")
-  #  file(WRITE ${RELEASE_TARGET} "${_contents}")
-  #endforeach()
 
 
 endif()
