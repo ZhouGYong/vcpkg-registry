@@ -17,8 +17,8 @@ vcpkg_check_linkage(ONLY_DYNAMIC_LIBRARY)
 vcpkg_from_github(
   OUT_SOURCE_PATH SOURCE_PATH
   REPO ZhouGYong/datakit-sdk-cpp
-  REF 4976de38588746c7a8a2652f7abbfc0987362cac
-  SHA512 86fd4070d4e277558a08e7fcc58b8ea53a1d02a2453e71a2f46dc1efd5e64e8430e8323b3a33d416f9449f4e86a2ad729aad15090f408d09f482530e11fc6b08
+  REF d61c7e099ca0e208cbf6372d833fc1538373d4f6
+  SHA512 bb2a620ea588a7029200991998f1fd4cb89721b113081a7992295970099964f84655c73b53e0e24eaa6b52eb3c1f197cbc0413c60eb0104ec5c7fdf20a327542
   HEAD_REF main
 )
 
@@ -40,7 +40,7 @@ vcpkg_configure_cmake(
 	  -DBUILD_FROM_VCPKG=TRUE
 )
 vcpkg_install_cmake()
-vcpkg_fixup_cmake_targets()
+#vcpkg_fixup_cmake_targets()
 
 file(GLOB headers "${SOURCE_PATH}/src/datakit-sdk-cpp/ft-sdk/Include/*.h")
 file(COPY ${headers} DESTINATION "${CURRENT_PACKAGES_DIR}/include/datakit-sdk-cpp")
@@ -82,14 +82,14 @@ elseif(VCPKG_TARGET_IS_LINUX)
   file(COPY "${SOURCE_PATH}/datakit_sdk_redist/Release/cmake/ft-sdk-targets-release.cmake" DESTINATION "${CURRENT_PACKAGES_DIR}/share/datakit-sdk-cpp")
   file(COPY "${SOURCE_PATH}/datakit_sdk_redist/Debug/cmake/ft-sdk-targets-debug.cmake" DESTINATION "${CURRENT_PACKAGES_DIR}/share/datakit-sdk-cpp")
 
-  file(GLOB_RECURSE RELEASE_TARGETS
-  "${CURRENT_PACKAGES_DIR}/share/datakit-sdk-cpp/*.cmake"
-  )
-  foreach(RELEASE_TARGET IN LISTS RELEASE_TARGETS)
-    file(READ ${RELEASE_TARGET} _contents)
-    string(REPLACE "${CURRENT_PACKAGES_DIR}" "\${CURRENT_PACKAGES_DIR}" _contents "${_contents}")
-    file(WRITE ${RELEASE_TARGET} "${_contents}")
-  endforeach()
+  #file(GLOB_RECURSE RELEASE_TARGETS
+  #"${CURRENT_PACKAGES_DIR}/share/datakit-sdk-cpp/*.cmake"
+  #)
+  #foreach(RELEASE_TARGET IN LISTS RELEASE_TARGETS)
+  #  file(READ ${RELEASE_TARGET} _contents)
+  #  string(REPLACE "${CURRENT_PACKAGES_DIR}" "\${CURRENT_PACKAGES_DIR}" _contents "${_contents}")
+  #  file(WRITE ${RELEASE_TARGET} "${_contents}")
+  #endforeach()
 
 
 endif()
